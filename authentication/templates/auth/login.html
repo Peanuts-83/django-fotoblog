@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Signin</h1>
+<p>{{message}}</p>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button type="submit">Connect</button>
+</form>
+{% if not user.is_authenticated  %}
+    <p>Still not a member?
+        <a href="{% url 'signup' %}">Signup here.</a>
+    </p>
+{% endif %}
+{% endblock content %}

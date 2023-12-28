@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block content %}
+<a href="{% url 'photo-upload' %}">Add a photo</a>
+<h2>Photos</h2>
+<div class="photos">
+        {% for photo in photos %}
+        <div class="photo-container">
+            <form action="{% url 'photo-delete' photo.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Delete"></input>
+            </form>
+            <img src="{{ photo.image.url }}" alt="photo" class="photo">
+            <p>{{ photo.caption }}</p>
+        </div>
+        {% endfor %}
+    </div>
+<script>
+    function onDeletePhoto(id) {
+
+    }
+</script>
+{% endblock content %}

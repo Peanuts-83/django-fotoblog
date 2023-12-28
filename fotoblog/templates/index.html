@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Fotoblog</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+        <p>You are connected as {{request.user}}.
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+        {% endif %}
+        <h1><a href="{% url 'login' %}">Fotoblog</a></h1>
+    </nav>
+    <div class="main-content">
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+</html>

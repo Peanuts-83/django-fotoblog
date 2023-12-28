@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>Create an account.</h2>
+<p>{{message}}</p>
+{% if form.errors %}
+    {{ form.errors }}
+{% endif %}
+{% if user.is_authenticated  %}
+    <p>Please logout to create an account.</p>
+{% endif %}
+{% if not user.is_authenticated  %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button type="submit">Create</button>
+</form>
+{% endif %}
+{% endblock content %}

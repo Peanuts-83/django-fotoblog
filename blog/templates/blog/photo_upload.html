@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>Add a photo.</h2>
+<p>{{message}}</p>
+<div class="container">
+    <div class="col-50">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <div class="col-50">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Grey_Square.svg" alt="preview" id="preview">
+    </div>
+</div>
+<script>
+    // Preview loaded image
+    const inputImage = document.querySelector("input[type='file']")
+    const imageElt = document.querySelector("#preview")
+    inputImage.addEventListener('change', (event) => {
+        console.log(event.target)
+        imageElt.src = URL.createObjectURL(event.target.files[0])
+    })
+</script>
+{% endblock content %}
