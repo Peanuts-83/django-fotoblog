@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fotoblog',
     'authentication',
-    'blog'
+    'blog',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+# Required for debug toolbar!
+INTERNAL_IPS = [ "127.0.0.1" ]
 
 ROOT_URLCONF = 'fotoblog.urls'
 

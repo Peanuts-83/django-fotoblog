@@ -2,6 +2,7 @@ import string
 from django.forms import Form
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import resolve
 from . import forms
 
 from fotoblog import settings
@@ -16,13 +17,14 @@ class AuthView(View):
 
     def get(self, request) -> HttpResponse:
         form = self.form_class()
+        viewName = self.getViewName(request)
         if len(self.template_name) > 0:
             # user is logged > redirect to home
             if request.user.is_authenticated:
                 return redirect('home')
             # else allow signin process
             return render(
-                request, self.template_name, {"form": form, "message": self.message}
+                request, self.template_name, {"form": form, "message": self.message, "viewName":viewName}
             )
         else:
             # no template > logout
@@ -31,6 +33,7 @@ class AuthView(View):
 
     def post(self, request) -> HttpResponse:
         form = self.form_class(request.POST)
+        viewName = self.getViewName(request)
         if form.is_valid():
             # signinForm
             if self.form_class == forms.LoginForm:
@@ -52,5 +55,10 @@ class AuthView(View):
                 return redirect(settings.LOGIN_REDIRECT_URL)
 
         return render(
-            request, self.template_name, {"form": form, "message": self.message}
+            request, self.template_name, {"form": form, "message": self.message, "viewName":viewName}
         )
+
+    def getViewName(self, request) -> str:
+        l_path = request.path
+        l_view = resolve(l_path)
+        return l_view.view_name

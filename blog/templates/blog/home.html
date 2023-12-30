@@ -1,6 +1,10 @@
 {% extends 'index.html' %}
 {% block content %}
-<a href="{% url 'photo-upload' %}">Add a photo</a>
+<div id="actions">
+    <a href="{% url 'photo-upload' %}">Add a photo
+    <i class="fa-solid fa-plus"></i>
+    </a>
+</div>
 <h2>Photos</h2>
 <div class="photos">
         {% for photo in photos %}

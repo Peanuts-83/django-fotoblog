@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block content %}
-<h1>Signin</h1>
+<h2>Signin</h2>
 <p>{{message}}</p>
 <form action="" method="post">
     {% csrf_token %}
@@ -8,7 +8,7 @@
     <button type="submit">Connect</button>
 </form>
 {% if not user.is_authenticated  %}
-    <p>Still not a member?
+    <p id="form-comment">Still not a member?
         <a href="{% url 'signup' %}">Signup here.</a>
     </p>
 {% endif %}

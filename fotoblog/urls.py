@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import include, path
 from authentication.views import AuthView
 from blog.views import BlogView
 from authentication import forms as authForms
@@ -44,6 +44,15 @@ urlpatterns = [
         name="signup",
     ),
     path(
+        "profile/<int:id>/",
+        login_required(
+            BlogView.as_view(
+                form_class=blogForms.ProfileForm, template_name="blog/profile.html"
+            )
+        ),
+        name="profile"
+    ),
+    path(
         "home/",
         login_required(
             BlogView.as_view(
@@ -62,14 +71,18 @@ urlpatterns = [
         name="photo-upload",
     ),
     path(
-        "photos/<int:photo_id>/delete/",
+        "photos/<int:id>/delete/",
         login_required(BlogView.as_view(form_class=blogForms.PhotoForm)),
         name="photo-delete",
     ),
+    # Admin interface
     path("admin/", admin.site.urls),
+    # Django debug toolbar
+    path("__debug__/", include("debug_toolbar.urls"))
 ]
 
-# DEV MODE only: files at settings.MEDIA_ROOT are served at settings.MEDIA_URL
+# DEV MODE only: files at settings.MEDIA_ROOT are served at settings.MEDIA_URL ('media/')
+# same for STATIC_ROOT files with settings.STATIC_URL ('static/')
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
