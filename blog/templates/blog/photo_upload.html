@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load static %}
 {% block content %}
 <h2>Add
     <i class="fa-solid fa-plus"></i>
@@ -16,13 +17,5 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Grey_Square.svg" alt="preview" id="preview">
     </div>
 </div>
-<script>
-    // Preview loaded image
-    const inputImage = document.querySelector("input[type='file']")
-    const imageElt = document.querySelector("#preview")
-    inputImage.addEventListener('change', (event) => {
-        console.log(event.target)
-        imageElt.src = URL.createObjectURL(event.target.files[0])
-    })
-</script>
+<script src="{% static 'js/upload_photos.js' %}"></script>
 {% endblock content %}

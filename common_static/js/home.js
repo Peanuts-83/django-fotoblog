@@ -34,3 +34,29 @@ function getCookie(name) {
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return cookieValue ? cookieValue.pop() : '';
 }
+
+/**
+ * Display photo
+ * Show if url provided
+ * Hide if no url provided
+ */
+function showModal(imageUrl = undefined) {
+    const modalWrapper = document.querySelector('.modal-wrapper')
+    const modalPhoto = modalWrapper.querySelector('.photo')
+    switch (imageUrl) {
+        case undefined:
+            // doHideModal
+            modalPhoto.src = ''
+            modalWrapper.style.opacity = 0
+            modalWrapper.style.width = 0
+            modalWrapper.style.height = 0
+            break;
+        default:
+            // doShowModal
+            modalPhoto.src = imageUrl
+            modalWrapper.style.opacity = 1
+            modalWrapper.style.width = "100%"
+            modalWrapper.style.height = "100%"
+            break
+    }
+}

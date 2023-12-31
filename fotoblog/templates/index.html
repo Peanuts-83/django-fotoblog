@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    <div class="modal-wrapper" onclick="showModal()">
+        <div class="modal">
+            <img class="photo large-view"></img>
+        </div>
+    </div>
     <nav>
         {% if user.is_authenticated %}
         <p id="status">
@@ -42,5 +47,5 @@
         {% block content %}{% endblock content %}
     </div>
 </body>
-
+<script src="{% static 'js/home.js' %}"></script>
 </html>

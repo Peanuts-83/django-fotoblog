@@ -1,27 +1,35 @@
-{% extends 'index.html' %}
-{% load static %}
-{% block content %}
+{% extends 'index.html' %} {% load static %} {% block content %}
 <div id="actions">
-    <a href="{% url 'photo-upload' %}">Add a photo
+  <a href="{% url 'photo-upload' %}"
+    >Add a photo
     <i class="fa-solid fa-plus"></i>
-    </a>
+  </a>
 </div>
 <h2>Photos</h2>
 <div class="photos">
-        {% for photo in photos %}
-        <div class="photo-container">
-            <!-- <form action="{% url 'photo-delete' photo.id %}" method="POST">
+  {% for photo in photos %}
+  <div class="photo-container">
+    <!-- <form action="{% url 'photo-delete' photo.id %}" method="POST">
                 {% csrf_token %}
                 <input type="submit" value="Delete"></input>
             </form> -->
-            <div class="tools">{{ photo.id }}
-                <i class="fa-solid fa-eye" title="view"></i>
-                <i class="fa-solid fa-trash" onclick="deletePhoto({{ photo.id }})" title="delete"></i>
-            </div>
-            <img src="{{ photo.image.url }}" alt="photo" class="photo">
-            <p>{{ photo.caption }}</p>
-        </div>
-        {% endfor %}
+    <div class="tools">
+      {{ photo.id }}
+      <i
+        class="fa-solid fa-eye"
+        onclick="showModal('{{photo.image.url}}')"
+        title="view"
+      ></i>
+      <i
+        class="fa-solid fa-trash"
+        onclick="deletePhoto({{photo.id}})"
+        title="delete"
+      ></i>
     </div>
-<script src="{% static 'js/delete.js' %}"></script>
+    <img src="{{ photo.image.url }}" alt="photo" class="photo" />
+    <p>{{ photo.caption }}</p>
+  </div>
+  {% endfor %}
+</div>
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock content %}
