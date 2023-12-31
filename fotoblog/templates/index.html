@@ -15,7 +15,8 @@
 <body>
     <nav>
         {% if user.is_authenticated %}
-        <p id="status">You are connected as {{request.user}}.
+        <p id="status">
+            <span>You are connected as <strong>{{request.user}}</strong></span>
             <a href="{% url 'logout' %}">Logout</a>
             <a href="{% url 'profile' user.id %}">Modify your profile</a>
         </p>

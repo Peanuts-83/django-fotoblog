@@ -63,7 +63,7 @@ nav .profile {
     border-radius: 50%;
     padding: 1em;
     overflow: hidden;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0, 0, 0, .5);
 }
 
 nav .profile i {
@@ -95,7 +95,9 @@ form {
     padding: 0 20%;
 }
 
-input, select, button {
+input,
+select,
+button {
     width: 100%;
     padding: 12px 5px;
     border-bottom: 6px solid black;
@@ -142,9 +144,54 @@ form label {
 }
 
 .photo-container {
-    text-align: center;
+    position: relative;
+    display: flex;
+    /* Use flexbox */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    overflow: hidden;
+    /* Hide overflow */
+}
+
+.photo-container img {
     max-width: 100%;
+    /* Set max-width to avoid horizontal overflow */
     max-height: 100%;
+    /* Set max-height to avoid vertical overflow */
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Maintain aspect ratio */
+}
+
+.photo-container .tools {
+    position: absolute;
+    top: 50%;
+    opacity: 0;
+    transition: all ease-in .3s;
+}
+
+.photo-container .tools .fa-solid {
+    padding: 5px;
+    color: white;
+    font-size: 2em;
+    filter: blur(1px);
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all ease-in .15s;
+}
+
+.photo-container .tools .fa-solid:hover {
+    border: 2px solid white;
+    cursor: pointer;
+    filter: blur(0);
+    /* opacity: 1; */
+}
+
+.photo-container:hover .tools {
+    opacity: 1;
 }
 
 .photo {

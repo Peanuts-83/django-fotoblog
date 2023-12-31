@@ -72,7 +72,7 @@ urlpatterns = [
     ),
     path(
         "photos/<int:id>/delete/",
-        login_required(BlogView.as_view(form_class=blogForms.PhotoForm)),
+        login_required(BlogView.as_view()),
         name="photo-delete",
     ),
     # Admin interface

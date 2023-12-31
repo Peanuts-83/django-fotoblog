@@ -1,17 +1,11 @@
 from multiprocessing.managers import BaseManager
 import string
 from django.forms import Form
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import resolve
 from django.views.generic import View
 from . import forms, models
-from authentication import models as authModel
-
-# from django.contrib.auth.decorators import login_required
-# @login_required
-# def home(request):
-#     return render(request, 'blog/home.html')
 
 class BlogView(View):
     form_class: Form = forms.BaseForm
@@ -32,9 +26,7 @@ class BlogView(View):
     def post(self, request, **kwargs) -> HttpResponse:
         form = self.form_class(request.POST, request.FILES)
         viewName = self.getViewName(request)
-        #  Delete a photo by id
-        if 'delete' in request.path and kwargs['id']:
-            return self.delete(request, kwargs['id'])
+        # Update user profile
         if 'profile' in request.path:
             form = self.form_class(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -48,10 +40,12 @@ class BlogView(View):
             return redirect('home')
         return render(request, self.template_name, {'form':form, "viewName":viewName})
 
+    # TODO: remove file from disk after delete in database!
     def delete(self, request, id:int) -> HttpResponse:
-        elt = models.Photo.objects.get(id=id)
-        elt.delete()
-        return redirect('home')
+        if 'photo' in request.path:
+            elt = models.Photo.objects.get(id=id)
+            elt.delete()
+            return JsonResponse({'message':'Photo deleted successfully', 'code':200})
 
     def getViewName(self, request) -> str:
         l_path = request.path

@@ -92,10 +92,11 @@ DATABASES = {
     }
 }
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# Session max duration > 1 hour
+SESSION_COOKIE_AGE = 3600
 
+# Session expired if whole browser closed (not only 1 tab!)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -121,6 +122,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'authentication.validators.WithNumbersValidator'
     }
 ]
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Authentication - from User self extended class
 AUTH_USER_MODEL = 'authentication.User'
