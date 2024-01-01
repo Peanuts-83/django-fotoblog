@@ -29,7 +29,7 @@
         <h1><a href="{% url 'login' %}">Foto<br>&nbsp;blog</a></h1>
         <div class="profile">
             {% if user.photo_profile %}
-            <img src="{{ user.photo_profile }}" alt="profile">
+            <img src="/media/{{ user.photo_profile }}" alt="profile">
             {% endif %}
             {% if not user.photo_profile %}
             <i class="fa-solid fa-user"></i>

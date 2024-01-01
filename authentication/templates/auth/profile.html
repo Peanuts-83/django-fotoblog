@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load static %}
 {% block content %}
 <h2>Profile</h2>
 <p>{{message}}</p>
@@ -12,4 +13,5 @@
         <button type="submit">Save</button>
     </form>
 {% endif %}
+<script src="{% static 'js/profile.js' %}"></script>
 {% endblock content %}
