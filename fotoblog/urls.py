@@ -46,8 +46,8 @@ urlpatterns = [
     path(
         "profile/<int:id>/",
         login_required(
-            BlogView.as_view(
-                form_class=blogForms.ProfileForm, template_name="blog/profile.html"
+            AuthView.as_view(
+                form_class=authForms.ProfileForm, template_name="auth/profile.html"
             )
         ),
         name="profile"

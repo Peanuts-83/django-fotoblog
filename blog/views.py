@@ -19,16 +19,11 @@ class BlogView(View):
         photos: BaseManager[models.Photo] = []
         if 'home' in request.path:
             photos = models.Photo.objects.all()
-        if 'profile' in request.path:
-            form = forms.ProfileForm(instance=request.user)
         return render(request, self.template_name, {'form':form, 'photos':photos, "viewName":viewName})
 
     def post(self, request, **kwargs) -> HttpResponse:
         form = self.form_class(request.POST, request.FILES)
         viewName = self.getViewName(request)
-        # Update user profile
-        if 'profile' in request.path:
-            form = self.form_class(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             # Photo upload
             if 'photo_upload' in self.template_name:
@@ -40,7 +35,6 @@ class BlogView(View):
             return redirect('home')
         return render(request, self.template_name, {'form':form, "viewName":viewName})
 
-    # TODO: remove file from disk after delete in database!
     def delete(self, request, id:int) -> HttpResponse:
         if 'photo' in request.path:
             elt = models.Photo.objects.get(id=id)
