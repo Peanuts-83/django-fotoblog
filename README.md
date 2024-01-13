@@ -13,6 +13,25 @@ A simple application displaying photos, with authentication, upload and update c
 
 ![Homepage](/common_static/README_media/screenshot.png)
 
+## Start project
+
+Check for python install (3.9 or higher) then follow the steps bellow.
+
+```bash
+# setup virtual environment
+python -m venv env
+# start virtual environment on linux/Mac
+source env/bin/activate
+# OR start virtual evironment on windows
+env\Scripts\activate
+# ensure django is installed
+pip install django
+# setup dependencies
+pip install -r requirements.txt
+# launch project
+python manage.py runserver
+```
+
 ## Technical stack
 
 - Python language based
