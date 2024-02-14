@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Write a bill</h2>
+    <form method='post' enctype='multipart/form-data'>
+        {{blog_form.as_p}}
+        {{photo_form.as_p}}
+        {% csrf_token %}
+        <button type='submit'>Publish</button>
+    </form>
+{% endblock content %}

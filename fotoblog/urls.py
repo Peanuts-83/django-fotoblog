@@ -29,52 +29,48 @@ urlpatterns = [
     # path('logout/', authentication.views.logout_page, name='logout'),
     # path('logout/', LogoutView.as_view(), name='logout'),
     path(
-        "",
-        AuthView.as_view(
+        "", AuthView.as_view(
             form_class=authForms.LoginForm, template_name="auth/login.html"
         ),
         name="login",
     ),
     path("logout/", AuthView.as_view(), name="logout"),
     path(
-        "signup/",
-        AuthView.as_view(
+        "signup/", AuthView.as_view(
             form_class=authForms.SignupForm, template_name="auth/signup.html"
-        ),
-        name="signup",
+        ), name="signup",
     ),
     path(
-        "profile/<int:id>/",
-        login_required(
+        "profile/<int:id>/", login_required(
             AuthView.as_view(
                 form_class=authForms.ProfileForm, template_name="auth/profile.html"
             )
-        ),
-        name="profile"
+        ), name="profile"
     ),
     path(
-        "home/",
-        login_required(
+        "home/", login_required(
             BlogView.as_view(
                 form_class=blogForms.BaseForm, template_name="blog/home.html"
             )
-        ),
-        name="home",
+        ), name="home",
     ),
     path(
-        "photos/add/",
-        login_required(
+        "photos/add/", login_required(
             BlogView.as_view(
                 form_class=blogForms.PhotoForm, template_name="blog/photo_upload.html"
             )
-        ),
-        name="photo-upload",
+        ), name="photo-upload",
     ),
     path(
-        "photos/<int:id>/delete/",
-        login_required(BlogView.as_view()),
-        name="photo-delete",
+        "photos/<int:id>/delete/", login_required(BlogView.as_view()), name="photo-delete"
     ),
+    path(
+        "blog/create", login_required(
+            BlogView.as_view(
+                form_class=blogForms.AddBillForm, template_name="blog/create.html"
+            )
+        ), name="blog-create"),
+
     # Admin interface
     path("admin/", admin.site.urls),
     # Django debug toolbar
@@ -84,5 +80,7 @@ urlpatterns = [
 # DEV MODE only: files at settings.MEDIA_ROOT are served at settings.MEDIA_URL ('media/')
 # same for STATIC_ROOT files with settings.STATIC_URL ('static/')
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)

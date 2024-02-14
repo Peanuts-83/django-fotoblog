@@ -71,7 +71,7 @@ nav .profile {
 }
 
 nav .profile img {
-    transform: scale(1.5);
+    transform: translateX(-25%) translateY(-25%);
 }
 
 nav .profile i {
@@ -89,7 +89,6 @@ a:hover {
 }
 
 h1 {
-    z-index: 10;
     position: relative;
     margin-block-end: 20px;
     font-size: 150px;
@@ -167,6 +166,7 @@ form .clearable-photo-input img {
 .photo-container {
     position: relative;
     display: flex;
+    flex-direction: column;
     /* Use flexbox */
     justify-content: center;
     /* Center horizontally */
@@ -202,6 +202,7 @@ form .clearable-photo-input img {
     border-radius: 50%;
     border: 2px solid transparent;
     transition: all ease-in .15s;
+    background-color: rgba(9,9,9,.3);
 }
 
 .photo-container .tools .fa-solid:hover {

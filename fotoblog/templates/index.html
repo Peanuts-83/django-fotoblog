@@ -26,10 +26,12 @@
             <a href="{% url 'profile' user.id %}">Modify your profile</a>
         </p>
         {% endif %}
-        <h1><a href="{% url 'login' %}">Foto<br>&nbsp;blog</a></h1>
+        <a href="{% url 'login' %}"><h1>Foto<br>&nbsp;blog</h1></a>
         <div class="profile">
             {% if user.photo_profile %}
-            <img src="/media/{{ user.photo_profile }}" alt="profile">
+            <a href="{% url 'profile' user.id %}">
+                <img src="/media/{{ user.photo_profile }}" alt="profile">
+            </a>
             {% endif %}
             {% if not user.photo_profile %}
             <i class="fa-solid fa-user"></i>
